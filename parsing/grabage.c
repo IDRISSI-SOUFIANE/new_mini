@@ -60,6 +60,7 @@ void free_tokens(t_token *tokens)
 
 		if (tmp->value)
 		{
+			i = 0;
 			while (tmp->value[i])
 			{
 				free(tmp->value[i]);
@@ -85,6 +86,7 @@ t_token *deldum(t_token **head)
 
 	if (temp->value)
 	{
+		i = 0;
 		while (temp->value[i])
 		{
 			free(temp->value[i]);

@@ -12,6 +12,7 @@
 
 #include "../include/minishell.h"
 
+/* */
 int check_quotes(char *line, int i, int count_quote)
 {
 	char quote;
@@ -39,6 +40,7 @@ int check_quotes(char *line, int i, int count_quote)
 	return (0);
 }
 
+/* */
 int lexing(char *line)
 {
 	int i;
@@ -61,37 +63,34 @@ int lexing(char *line)
 
 	data = parsing(&tokens);
 
-	/* PRINT */
-	/*
-	t_data *tmp = data;
-	while (tmp)
-	{
+	// PRINT
+	// t_data *tmp = data;
+	// while (tmp)
+	// {
 
-		printf("Command: %s\n", tmp->cmd ? tmp->cmd : "(no command)");
+	// 	printf("Command: %s\n", tmp->cmd ? tmp->cmd : "(no command)");
 
-		// Print arguments
-		printf("Arguments:");
-		if (tmp->args)
-		{
-			for (int i = 0; tmp->args[i]; i++)
-				printf(" %s", tmp->args[i]);
-		}
-		printf("\n");
-		if (tmp->file)
-		{
-			while (tmp->file)
-			{
-				printf("[fname: %s | ftype: %d]\n", tmp->file->name, tmp->file->type);
-				tmp->file = tmp->file->next;
-			}
-		}
+	// 	// Print arguments
+	// 	printf("Arguments:");
+	// 	if (tmp->args)
+	// 	{
+	// 		for (int i = 0; tmp->args[i]; i++)
+	// 			printf(" %s", tmp->args[i]);
+	// 	}
+	// 	printf("\n");
+	// 	if (tmp->file)
+	// 	{
+	// 		while (tmp->file)
+	// 		{
+	// 			printf("[fname: %s | ftype: %d]\n", tmp->file->name, tmp->file->type);
+	// 			tmp->file = tmp->file->next;
+	// 		}
+	// 	}
 
-		printf("\n");
-		tmp = tmp->next;
-	}
-		*/
+	// 	printf("\n");
+	// 	tmp = tmp->next;
+	// }
 
-	/* */
 	// Free the entire t_data list and its contents
 	t_data *current_data = data;
 	while (current_data)
@@ -129,7 +128,6 @@ int lexing(char *line)
 		free(current_data);
 		current_data = next_data;
 	}
-	/**/
 
 	free_tokens(tokens);
 	return (0);
@@ -157,14 +155,19 @@ int lexing(char *line)
 	{
 		if (temp->value)
 		{
-			printf("%s\n", temp->value[i]);
-			i++;
+			i = 0;
+			while (temp->value[i])
+			{
+				printf("[value : %s -:- type : %d]\n", temp->value[i], temp->type);
+				i++;
+			}
 		}
 		temp = temp->next;
 	}
 	free_tokens(tokens);
 	return (0);
 }
+
 */
 
 int main(int ac, char **av, char **env)
@@ -179,7 +182,7 @@ int main(int ac, char **av, char **env)
 		line = readline("Minishell: ");
 		if (line == NULL)
 		{
-			free(line);
+			// free(line);
 			break;
 		}
 		lexing(line);
