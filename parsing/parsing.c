@@ -29,7 +29,7 @@ void add_redirection(t_data *current, t_token *token)
 	t_redir *new_redir = malloc(sizeof(t_redir));
 	if (!new_redir)
 		return;
-	new_redir->name = ft_strdup(token->value);
+	new_redir->name = ft_strdup(token->value[0]);
 	new_redir->type = token->type;
 	new_redir->next = NULL;
 
@@ -85,9 +85,9 @@ t_data *parsing(t_token **tokens)
 			current = current->next;
 		}
 		else if (temp->type == CMD)
-			current->cmd = ft_strdup(temp->value);
+			current->cmd = ft_strdup(temp->value[0]);
 		else if (temp->type == WORD)
-			add_argument(current, temp->value);
+			add_argument(current, temp->value[0]);
 		else if (temp->type >= FREAD_IN && temp->type <= F_APPEND)
 			add_redirection(current, temp);
 		temp = temp->next;

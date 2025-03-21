@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-
 /*
 
 ls >| a should handle this
@@ -27,6 +26,8 @@ ls | > a
 
 mzal kynin MCHAKILL FI ERROR.C
 */
+
+/*
 
 int	is_redirect(t_keyword type)
 {
@@ -104,3 +105,4 @@ int	error1(t_token *tokens)
 	return (ft_putstr_fd(ERROR, STDERR_FILENO), 1);
 	return (0);
 }
+*/

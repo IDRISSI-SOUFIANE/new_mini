@@ -51,7 +51,7 @@ typedef struct s_quote_data
 
 typedef struct s_token
 {
-	char *value;
+	char **value;
 	t_keyword type;
 	struct s_token *next;
 } t_token;
@@ -75,7 +75,7 @@ typedef struct s_redir
 
 typedef struct s_data
 {
-	char *cmd;
+	char *cmd; // ALSO DOUBLE POINTER WHEN EXPAND $VAR="ONE TWO ..."
 	char **args;
 	t_redir *file;
 	struct s_data *next;

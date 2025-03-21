@@ -36,50 +36,28 @@ void ft_lstadd_back(t_token **lst, t_token *new)
 
 t_token *ft_lstnew(char *content, t_keyword type)
 {
-	t_token *new_node;
+	t_token *new;
 
-	new_node = (t_token *)malloc(sizeof(t_token));
-	if (!new_node)
+	new = malloc(sizeof(t_token));
+	if (!new)
 		return (NULL);
-	new_node->value = content;
-	new_node->type = type;
-	new_node->next = NULL;
-	return (new_node);
-}
 
-/*
-#include "../include/minishell.h"
-
-void free_redir(t_redir *redir)
-{
-	t_redir *temp;
-
-	while (redir)
+	new->value = malloc(2 * sizeof(char *));
+	if (!new->value)
 	{
-		temp = redir->next;
-		free(redir->name);
-		free(redir);
-		redir = temp;
+		free(new);
+		return (NULL);
 	}
-}
 
-void free_data(t_data *data)
-{
-	t_data *temp;
-
-	while (data)
+	new->value[0] = content;
+	if (!new->value[0])
 	{
-		temp = data->next;
-		free(data->cmd);
-		if (data->args)
-		{
-			for (int i = 0; data->args[i]; i++)
-				free(data->args[i]);
-			free(data->args);
-		}
-		free_redir(data->file);
-		free(data);
-		data = temp;
+		free(new->value);
+		free(new);
+		return (NULL);
 	}
+	new->value[1] = NULL;
+	new->type = type;
+	new->next = NULL;
+	return new;
 }
-*/

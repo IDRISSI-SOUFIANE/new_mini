@@ -74,22 +74,19 @@ static char *open_herdoc(char *delimter)
 
 void ft_herdoc(t_token *tokens)
 {
-	t_token *current;
+	t_token *current = tokens;
 	char *name;
 
-	current = tokens;
 	while (current)
 	{
 		if (current->type == HERDOC && current->next && current->next->type == F_HERDOC)
 		{
-			name = open_herdoc(current->next->value);
+			name = open_herdoc(current->next->value[0]);
 			if (name)
 			{
-				free(current->next->value);
-				current->next->value = name;
+				free(current->next->value[0]);
+				current->next->value[0] = name;
 			}
-			else
-				return;
 		}
 		current = current->next;
 	}

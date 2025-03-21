@@ -10,105 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-# include "../include/minishell.h"
-
-int	check_quotes(char *line, int i, int count_quote)
-{
-	char	quote;
-
-	while (line[i])
-	{
-		if (line[i] == '\'' || line[i] == '\"')
-		{
-			quote = line[i];
-			count_quote++;
-			i++;
-			while (line[i] && line[i] != quote)
-				i++;
-			if (line[i] == quote)
-				count_quote++;
-			else
-				break ;
-			i++;
-		}
-		else
-			i++;
-	}
-	if (count_quote % 2)
-		return (1);
-	return (0);
-}
-
-int	lexing(char *line)
-{
-	int		i;
-	int		count_quote;
-	t_token	*tokens;
-	t_data	*data;
-
-	i = 0;
-	count_quote = 0;
-	if (check_quotes(line, i, count_quote))
-		return (ft_putstr_fd("missing of Quotation\n", 2), 1);
-	tokens = tokenization(line, i);
-	if (NULL == tokens)
-		return (0);
-
-	ft_rename(tokens);
-
-	ft_herdoc(tokens);
-
-	expand(tokens);
-
-	// if (error1(tokens))
-	// {
-	// 	free_tokens(tokens);
-	// 	return (1);
-	// }
-
-	data = parsing_1(&tokens);
-
-	t_token *temp;
-	temp = tokens;
-	while (temp)
-	{
-		printf("value: %s\t type: %d \n", temp->value, temp->type);
-		temp = temp->next;
-	}
-	free_tokens(tokens);
-	return (0);
-}
-
-
-int main(int ac , char **av, char **env)
-{
-	((void)ac, (void)av, (void)env);
-
-	char	*line;
-	while (1)
-	{
-		line = readline("Minishell: ");
-		if (line == NULL)
-			break ;
-		lexing(line);
-		// lexing(line, env);
-		// if (lexing(line))
-		// 	return (free(line), 1);
-
-		// parsing line
-
-
-		// executre
-
-		if (line[0] !=  '\0')
-			add_history(line);
-		free(line);
-	}
-	return (0);
-}
-*/
-
 #include "../include/minishell.h"
 
 int check_quotes(char *line, int i, int count_quote)
@@ -165,6 +66,7 @@ int lexing(char *line)
 	t_data *tmp = data;
 	while (tmp)
 	{
+
 		printf("Command: %s\n", tmp->cmd ? tmp->cmd : "(no command)");
 
 		// Print arguments
@@ -187,8 +89,9 @@ int lexing(char *line)
 		printf("\n");
 		tmp = tmp->next;
 	}
-	*/
+		*/
 
+	/* */
 	// Free the entire t_data list and its contents
 	t_data *current_data = data;
 	while (current_data)
@@ -226,10 +129,43 @@ int lexing(char *line)
 		free(current_data);
 		current_data = next_data;
 	}
+	/**/
 
 	free_tokens(tokens);
 	return (0);
 }
+
+/*
+int lexing(char *line)
+{
+	int i;
+	int count_quote;
+	t_token *tokens;
+
+	i = 0;
+	count_quote = 0;
+	if (check_quotes(line, i, count_quote))
+		return (ft_putstr_fd("missing quotation\n", 2), 1);
+
+	tokens = tokenization(line, i);
+	if (tokens == NULL)
+		return (0);
+
+	t_token *temp = tokens;
+
+	while (temp)
+	{
+		if (temp->value)
+		{
+			printf("%s\n", temp->value[i]);
+			i++;
+		}
+		temp = temp->next;
+	}
+	free_tokens(tokens);
+	return (0);
+}
+*/
 
 int main(int ac, char **av, char **env)
 {
@@ -242,7 +178,10 @@ int main(int ac, char **av, char **env)
 	{
 		line = readline("Minishell: ");
 		if (line == NULL)
+		{
+			free(line);
 			break;
+		}
 		lexing(line);
 		if (line[0] != '\0')
 			add_history(line);

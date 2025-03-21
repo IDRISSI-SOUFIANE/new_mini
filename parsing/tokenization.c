@@ -97,6 +97,8 @@ t_token *tokenization(char *line, int i)
 	t_token *head;
 
 	head = ft_lstnew(ft_strdup("."), START);
+	if (!head)
+		return NULL;
 	while (line[i])
 	{
 		if (line[i] == '\'' || line[i] == '\"')
@@ -112,5 +114,5 @@ t_token *tokenization(char *line, int i)
 			handle_mixed_words(line, &i, &head);
 	}
 	head = deldum(&head);
-	return head;
+	return (head);
 }
