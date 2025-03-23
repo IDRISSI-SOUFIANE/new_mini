@@ -48,13 +48,14 @@ void add_argument(t_data *current, char *arg)
 {
 	int count;
 	int i;
+	char **new_args;
 
 	count = 0;
 	i = 0;
 	if (current->args)
 		while (current->args[count])
 			count++;
-	char **new_args = malloc((count + 2) * sizeof(char *));
+	new_args = malloc((count + 2) * sizeof(char *));
 	if (!new_args)
 		return;
 	while (i < count)
@@ -85,9 +86,9 @@ t_data *parsing(t_token **tokens)
 			current = current->next;
 		}
 		else if (temp->type == CMD)
-			current->cmd = ft_strdup(temp->value[0]);
+			current->cmd = ft_strdup(temp->value[0]); // current->cmd = temp->value
 		else if (temp->type == WORD)
-			add_argument(current, temp->value[0]);
+			add_argument(current, temp->value[0]); // current->args = temp->value
 		else if (temp->type >= FREAD_IN && temp->type <= F_APPEND)
 			add_redirection(current, temp);
 		temp = temp->next;

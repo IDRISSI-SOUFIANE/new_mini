@@ -64,32 +64,32 @@ int lexing(char *line)
 	data = parsing(&tokens);
 
 	// PRINT
-	// t_data *tmp = data;
-	// while (tmp)
-	// {
+	t_data *tmp = data;
+	while (tmp)
+	{
 
-	// 	printf("Command: %s\n", tmp->cmd ? tmp->cmd : "(no command)");
+		printf("Command: %s\n", tmp->cmd ? tmp->cmd : "(no command)");
 
-	// 	// Print arguments
-	// 	printf("Arguments:");
-	// 	if (tmp->args)
-	// 	{
-	// 		for (int i = 0; tmp->args[i]; i++)
-	// 			printf(" %s", tmp->args[i]);
-	// 	}
-	// 	printf("\n");
-	// 	if (tmp->file)
-	// 	{
-	// 		while (tmp->file)
-	// 		{
-	// 			printf("[fname: %s | ftype: %d]\n", tmp->file->name, tmp->file->type);
-	// 			tmp->file = tmp->file->next;
-	// 		}
-	// 	}
+		// Print arguments
+		printf("Arguments:");
+		if (tmp->args)
+		{
+			for (int i = 0; tmp->args[i]; i++)
+				printf(" %s", tmp->args[i]);
+		}
+		printf("\n");
+		if (tmp->file)
+		{
+			while (tmp->file)
+			{
+				printf("[fname: %s | ftype: %d]\n", tmp->file->name, tmp->file->type);
+				tmp->file = tmp->file->next;
+			}
+		}
 
-	// 	printf("\n");
-	// 	tmp = tmp->next;
-	// }
+		printf("\n");
+		tmp = tmp->next;
+	}
 
 	// Free the entire t_data list and its contents
 	t_data *current_data = data;
